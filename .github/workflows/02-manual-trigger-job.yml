@@ -1,50 +1,23 @@
-# name: Manually trigger an Azure Machine Learning job - Liqun
-
-# on:
-#   workflow_dispatch:
-
-# jobs:
-#   train:
-#     runs-on: ubuntu-latest
-#     steps:
-#     - name: Check out repo
-#       uses: actions/checkout@main
-#     - name: Install az ml extension
-#       run: az extension add -n ml -y
-#     - name: Azure login
-#       uses: azure/login@v1
-#       with:
-#         creds: ${{secrets.AZURE_CREDENTIALS}}
-
-
-
-name: Manual Trigger for Azure ML Job - Liqun
+name: Manually trigger an Azure Machine Learning job - Liqun
 
 on:
   workflow_dispatch:
 
 jobs:
-  trigger-azure-ml-job:
+  train:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.8'
-
-    - name: Install Azure CLI
-      run: |
-        curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
-
-    - name: Authenticate with Azure
+    
+    - name: 1. Check out repo
+      uses: actions/checkout@main
+      
+    - name: 2. Install az ml extension
+      run: az extension add -n ml -y
+      
+    - name: 3. Azure login
       uses: azure/login@v1
       with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        creds: ${{secrets.TESTING_SECRET}}
 
-    - name: Install Azure ML CLI extension
-      run: |
-        az extension add --name ml
+    - name: 4. Run Azure ML Job
+      run: az ml job create --file ./src/job.yml --resource-group ReportingTeamML --workspace-name MSLearn-MLOps
