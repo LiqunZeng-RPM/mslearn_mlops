@@ -6,11 +6,11 @@ inputs:
 
   training_data: 
     type: uri_folder 
-    path: azureml:diabetes-dev-v2-LZ:1
+    path: azureml:diabetes-dev-v2-LZ:2
     
   reg_rate: 0.01
   
 environment: azureml:AzureML-sklearn-0.24-ubuntu18.04-py37-cpu@latest
 compute: azureml:MLOps-LZ-Cluster
-experiment_name: diabetes-train-localTerminal-LZ-GitHub-Actions
+experiment_name: diabetes-train-GitHub-Action-LZ
 description: LZ GitHub Actions exercise
