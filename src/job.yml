@@ -6,7 +6,7 @@ inputs:
 
   training_data: 
     type: uri_folder 
-    path: azureml:diabetes-dev-v2-LZ:2
+    path: azureml:diabetes-data-az-folder-LZ:1
     
   reg_rate: 0.01
   
