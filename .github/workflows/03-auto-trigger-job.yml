@@ -8,15 +8,11 @@ on:
       - main
 
 jobs:
-  if_merged:
+  train:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
-    - run: echo The PR was merged
-    
-  train:
-    runs-on: ubuntu-latest
-    steps:
+    - run: echo The PR was merged. Processing Training...
     
     - name: 1. Check out repo
       uses: actions/checkout@main
@@ -28,6 +24,6 @@ jobs:
       uses: azure/login@v1
       with:
         creds: ${{secrets.TESTING_SECRET}}
-
+  
     - name: 4. Run Azure ML Job
       run: az ml job create --file ./src/job.yml --resource-group ReportingTeamML --workspace-name MSLearn-MLOps
