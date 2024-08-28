@@ -1,0 +1,25 @@
+# # what to type of object upload? 'data.schema.json', i.e., folder with data
+# $schema: https://azuremlschemas.azureedge.net/latest/data.schema.json
+ 
+# # what exactly to upload? 'uri_file', i.e., a file
+# type: uri_file
+ 
+# # location of folder
+# path: 'D:\Training Courses\mslearn_mlops\mslearn_mlops\experimentation\data\diabetes-dev.csv'
+ 
+# # name of asset in Azure
+# name: diabetes-dev-az-LZ
+ 
+# # version of upload/folder
+# version: 1
+ 
+# # description of folder and/or its contents
+# description: Data folder containing the diabetes CSV
+
+
+$schema: https://azuremlschemas.azureedge.net/latest/data.schema.json
+type: uri_folder
+name: diabetes-data-az-folder-LZ
+version: 1
+path: D:\Training Courses\mslearn_mlops\mslearn_mlops\experimentation\data
+description: Dataset pointing to diabetes data stored as CSV on local computer. Data is uploaded to default datastore.
