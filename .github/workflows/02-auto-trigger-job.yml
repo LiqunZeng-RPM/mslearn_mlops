@@ -1,0 +1,25 @@
+name: Manually trigger an Azure Machine Learning job - Liqun
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  train:
+    runs-on: ubuntu-latest
+    steps:
+    
+    - name: 1. Check out repo
+      uses: actions/checkout@main
+      
+    - name: 2. Install az ml extension
+      run: az extension add -n ml -y
+      
+    - name: 3. Azure login
+      uses: azure/login@v1
+      with:
+        creds: ${{secrets.TESTING_SECRET}}
+
+    - name: 4. Run Azure ML Job
+      run: az ml job create --file ./src/job.yml --resource-group ReportingTeamML --workspace-name MSLearn-MLOps
