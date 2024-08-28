@@ -1,6 +1,8 @@
 name: Auto trigger an Azure Machine Learning job - Liqun
 
 on:
+# When a pull request is merges, the pull request is automatically closed. 
+# The if_merged job will only run if the pull request was also merged.
   pull_request:
     types:
       - closed
@@ -8,11 +10,16 @@ on:
       - main
 
 jobs:
+  if_merged:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo The PR was merged
+      
   train:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
-    - run: echo The PR was merged. Processing Training...
     
     - name: 1. Check out repo
       uses: actions/checkout@main
