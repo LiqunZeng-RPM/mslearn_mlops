@@ -1,4 +1,4 @@
-name: Manually trigger an Azure Machine Learning job - Liqun
+name: Auto trigger an Azure Machine Learning job - Liqun
 
 on:
   push:
