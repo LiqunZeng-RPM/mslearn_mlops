@@ -17,6 +17,7 @@ jobs:
       - run: echo The PR was merged
       
   train:
+    if: github.event.pull_request.merged == true # Run only when the PR is merged
     runs-on: ubuntu-latest
     steps:
     
