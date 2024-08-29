@@ -1,7 +1,6 @@
 name: Auto Code checks
 
 on:
-# The if_merged job will only run if the pull request was opened.
   pull_request:
     types:
       - opened
@@ -11,34 +10,41 @@ jobs:
     name: linting
     runs-on: ubuntu-latest
     steps:
+      - name: Check out repo
+        uses: actions/checkout@main
 
-    - name: Check out repo
-      uses: actions/checkout@main
+      - name: Use Python version 3.8
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.8'
 
-    - name: Use Python version 3.8
-      uses: actions/setup-python@v3
-      with:
-        python-version: '3.8'
+      - name: Install Flake8
+        run: |
+          python -m pip install flake8
 
-    - name: Install Flake8
-      run: |
-        python -m pip install flake8
-    - name: Run linting tests
-      run: | 
-        flake8 src/model/
+      - name: Run linting tests
+        run: |
+          flake8 src/model/
 
   job2:
-      name: unit tests
-      runs-on: ubuntu-latest
-      steps:
-    
-    - name: Install packages
-      run: | 
-        python -m pip install pandas
-        python -m pip install mlflow
-        python -m pip install scikit-learn
+    name: unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@main
 
-    - name: Run unit tests
-      run: | 
-        python -m pip install pytest
-        pytest tests/test_train.py
+      - name: Use Python version 3.8
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.8'
+
+      - name: Install packages
+        run: |
+          python -m pip install pandas
+          python -m pip install mlflow
+          python -m pip install scikit-learn
+
+      - name: Run unit tests
+        run: |
+          python -m pip install pytest
+          pytest tests/test_train.py
